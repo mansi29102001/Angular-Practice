@@ -1,0 +1,39 @@
+<!-- {{room | json}} -->
+<!-- <div *ngIf="form.invalid" class="alert alert-danger">
+    <span>The form is invalid !</span>
+</div> -->
+<div class="alert alert-success" *ngIf="successMessage">
+    {{successMessage}}
+</div>
+
+<form #form="ngForm" (ngSubmit)="addRoom(form)">
+    <div class="form-group">
+        <label>Room Type</label>
+        <input #roomType="ngModel" type="text" name="roomType" class="form-control" required="true" [(ngModel)]="room.roomType" />
+    </div>
+    <div *ngIf="roomType.errors?.['required'] && (roomType.dirty || roomType.touched)" class="alert alert-danger">
+        <span>Room Type is required.</span>
+    </div>
+    <div class="form-group">
+        <label>Amenities</label>
+        <input #amenities="ngModel" type="text" name="amenities" class="form-control" required="true" [(ngModel)]="room.amenities" />
+    </div>
+    <div *ngIf="amenities.errors?.['required'] && (amenities.dirty || amenities.touched)" class="alert alert-danger">
+        <span>Amenities is required.</span>
+    </div>
+    <div class="form-group">
+        <label>Price</label>
+        <input type="number" name="price" class="form-control" required="true" [(ngModel)]="room.price" />
+    </div>
+    <div class="form-group">
+        <label>Check In Time</label>
+        <input type="datetime" name="checkInTime" class="form-control" required="true" [(ngModel)]="room.checkinTime" />
+    </div>
+    <div class="form-group">
+        <label>Check Out Time</label>
+        <input type="datetime" name="checkOutTime" class="form-control" required="true" [(ngModel)]="room.checkoutTime" />
+    </div>
+    <div>
+        <button [disabled]="form.invalid" class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</form>

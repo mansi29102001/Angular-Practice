@@ -1,0 +1,21 @@
+<app-header></app-header>
+<h2>Welcome to hotel {{hotelName}}</h2>
+ 
+<div [ngStyle]="{color: 'red'}" [hidden]="hiderooms">
+    Number of rooms:
+    <div [innerText]="numberOfRooms"></div>
+</div>
+<div>{{getError$ | async}}</div>
+<div><button class="btn btn-primary" (click)="addRoom()">Add Room</button></div>
+
+<div *ngIf="rooms$ | async as roomsVal">
+    <app-rooms-list [rooms]="roomsVal" (selectedRoom)="selectRooms($event)"></app-rooms-list>
+</div>
+
+<button (click)="toggle()">Toggle</button>
+
+<button (click)="editRoom()">Edit Room</button>
+
+<button (click)="deleteRoom()">Delete Room</button>
+
+<router-outlet></router-outlet>
